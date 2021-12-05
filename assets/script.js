@@ -1,56 +1,147 @@
 // Assignment code here
-var lowerCase = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
-var upperCase = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
-var numberChars = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
-var symbolChars = ['!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '-', '=', '+', '?', '/', '>', '<'];
-var randomPass =[''];
+var lowerCase = [
+  "a",
+  "b",
+  "c",
+  "d",
+  "e",
+  "f",
+  "g",
+  "h",
+  "i",
+  "j",
+  "k",
+  "l",
+  "m",
+  "n",
+  "o",
+  "p",
+  "q",
+  "r",
+  "s",
+  "t",
+  "u",
+  "v",
+  "w",
+  "x",
+  "y",
+  "z",
+];
+var upperCase = [
+  "A",
+  "B",
+  "C",
+  "D",
+  "E",
+  "F",
+  "G",
+  "H",
+  "I",
+  "J",
+  "K",
+  "L",
+  "M",
+  "N",
+  "O",
+  "P",
+  "Q",
+  "R",
+  "S",
+  "T",
+  "U",
+  "V",
+  "W",
+  "X",
+  "Y",
+  "Z",
+];
+var numberChars = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"];
+var symbolChars = [
+  "!",
+  "@",
+  "#",
+  "$",
+  "%",
+  "^",
+  "&",
+  "*",
+  "(",
+  ")",
+  "-",
+  "=",
+  "+",
+  "?",
+  "/",
+  ">",
+  "<",
+];
+//var x = "123456789".split("");
+//console.log(x)
+
+var randomPass = [];
 
 function generatePassword() {
-var password = [''];
+  var password = "";
 
-var passwordLength = parseInt(prompt('How many characters do you want your password to be? Must be between 8 and 128 characters.'));
+  var passwordLength = parseInt(
+    prompt(
+      "How many characters do you want your password to be? Must be between 8 and 128 characters."
+    )
+  );
+  //console.log(passwordLength);
 
-if(passwordLength < 8 || passwordLength > 128) {
-  alert('Your password must be between 8 and 128 characters. Please try again.')
-};
+  if (passwordLength < 8 || passwordLength > 128 || !passwordLength) {
+    alert(
+      "Your password must be between 8 and 128 characters. Please try again."
+    );
+  } else {
+    var includeLower = confirm(
+      "Do you want lower case letters in your password?"
+    );
+    var includeUpper = confirm(
+      "Do you want upper case letters in your password?"
+    );
+    var includeNumber = confirm("Do you want numbers in your password?");
+    var includeSymbol = confirm("Do you want symbols in your password?");
 
-if(!passwordLength) {
-  alert('You must enter a number between 8 and 128. Please try again.')
-};
+    if (includeLower) {
+      //Use spread operator to add all lowercase characters to randomPass array, aka merging arrays
+      randomPass.push(...lowerCase);
+    }
 
-var includeLower = confirm('Do you want lower case letters in your password?');
-var includeUpper = confirm('Do you want upper case letters in your password?');
-var includeNumber = confirm('Do you want numbers in your password?');
-var includeSymbol = confirm('Do you want symbols in your password?');
+    if (includeUpper) {
+      randomPass.push(...upperCase);
+    }
 
-if(includeLower) {
-  randomPass += lowerCase
-};
+    if (includeNumber) {
+      randomPass.push(...numberChars);
+    }
 
-if(includeUpper) {
-  randomPass += upperCase
-};
+    if (includeSymbol) {
+      randomPass.push(...symbolChars);
+    }
 
-if(includeNumber) {
-  randomPass += numberChars
-};
+    //console.log(randomPass);
 
-if(includeSymbol) {
-  randomPass += symbolChars
-};
+    for (var i = 0; i < passwordLength; i++) {
+      //return a random index from randomPass array
+      passwordIndex = Math.floor(Math.random() * randomPass.length);
+      //console.log(passwordIndex);
 
-console.log(randomPass);
+      //return the actual value from the index you got back
+      randomPass[passwordIndex];
 
-for (var i = 0; i < randomPass.length; i++) {
-  password = randomPass(Math.floor(Math.random() * randomPass.length));
-}  
-console.log(password);
+      //everytime the loop is  run, a random value will be added to password string
+      password += randomPass[passwordIndex];
+    }
+    //console.log(password);
+
+  }
+
+  //function returns a final value, which is password
+  return password;
+
 }
-
-  
-
-
-
 
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
@@ -61,52 +152,8 @@ function writePassword() {
   var passwordText = document.querySelector("#password");
 
   passwordText.value = password;
-
 }
-
-
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
 
-
-
-
-
-
-
-/*var password = [''];
-  var passwordCharacters = '';
-  var characterLength = passwordCharacters.length;
-
-  passwordLength = parseInt(prompt('How many characters do you want your password to be? Must be between 8-128 characters.'));
-
-  if (passwordLength < 8 || passwordLength > 128){
-  alert('Your password must be between 8 and 128 characters. Please try again.')
-  return;
-  };
-
-  if (confirm('Do you want lower case characters in your password?')){
-    passwordCharacters = password.concat(lowerCase)
-  };
-
-  if (confirm('Do you want upper case characters in your password?')){
-    passwordCharacters = password.concat(upperCase)
-  };
-
-  if (confirm('Do you want numbers in your password?')){
-    passwordCharacters = password.concat(numberChars)
-  };
-
-  if (confirm('Do you want symbols in your password?')){
-    passwordCharacters = password.concat(symbolChars)
-  };
-
-  for (var index = 0; index < characterLength; index++) {
-    passwordCharacters = Math.floor(Math.random() * characterLength);
-    password.push(passwordCharacters);
-  }
-
-  console.log(password);
-
-}*/
