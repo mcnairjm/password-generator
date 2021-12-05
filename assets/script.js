@@ -121,6 +121,11 @@ function generatePassword() {
       randomPass.push(...symbolChars);
     }
 
+    if (!includeLower && !includeUpper && !includeNumber && !includeSymbol){
+      alert('You must select at least one parameter.');
+      return generatePassword();
+    }
+
     //console.log(randomPass);
 
     for (var i = 0; i < passwordLength; i++) {
