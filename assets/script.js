@@ -122,7 +122,7 @@ function generatePassword() {
     }
 
     if (!includeLower && !includeUpper && !includeNumber && !includeSymbol){
-      alert('You must select at least one parameter.');
+      alert('You must select at least one specification.');
       return generatePassword();
     }
 
